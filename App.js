@@ -1,11 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Switch, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Switch,
+  Button,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isButtonEnabled: true,
+      isButtonEnabled: false,
       label: "Disabled",
       isGifDisplayed: false
     };
@@ -13,41 +22,54 @@ export default class App extends React.Component {
 
   render() {
     console.disableYellowBox = true;
+
+    return (
+      <View style={styles.container}>
+        {this.state.isGifDisplayed ? this.ViewGif() : this.ViewBase()}
+      </View>
+    );
+  }
+
+  ViewBase() {
     return (
       <View style={styles.container}>
         <Text style={[styles.nested, styles.text]}>{this.state.label}</Text>
         <Switch
           style={styles.nested}
           value={this.state.isButtonEnabled}
-          onValueChange={isButtonEnabled => this.changeValue()}
+          onValueChange={this.changeValue}
         />
         <View style={styles.whiteButton}>
           <Button
             title="Let's Rock"
             style={styles.nested}
-            disabled={this.state.isButtonEnabled}
+            disabled={!this.state.isButtonEnabled}
             onPress={this.buttonPressed}
           />
         </View>
-        {this.state.isGifDisplayed && (
-          <View style={styles.imageContainer}>
-            <Image style={styles.gif} source={require("./reaper.gif")} />
-          </View>
-        )}
       </View>
     );
   }
 
-  changeValue() {
-    if (this.state.isButtonEnabled == true) {
-      this.setState({ label: "Enabled" });
-      this.setState({ isButtonEnabled: false });
-    } else {
-      this.setState({ label: "Disabled" });
-      this.setState({ isButtonEnabled: true });
-    }
-    console.log(this.state.isButtonEnabled);
+  ViewGif() {
+    //for use with multiple views to take whole screen
+    const { width, height } = Dimensions.get("window");
+
+    return (
+      <TouchableOpacity
+        onPress={() => this.setState({ isGifDisplayed: false })}
+      >
+        <View style={(width, height)}>
+          <Image style={styles.gif} source={require("./reaper.gif")} />
+        </View>
+      </TouchableOpacity>
+    );
   }
+  changeValue = value => {
+    let label = this.state.label === "Enabled" ? "Disabled" : "Enabled";
+    this.setState({ isButtonEnabled: value, label });
+    console.log(value);
+  };
 
   //To keep the 'this'
   buttonPressed = () => {
