@@ -1,59 +1,90 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Switch, Button } from "react-native";
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isButtonEnabled: true,
+      label: "Disabled",
+      isGifDisplayed: false
+    };
+  }
+
   render() {
     console.disableYellowBox = true;
     return (
       <View style={styles.container}>
-        <Text style={styles.texts}>Something</Text>
-        <Image style={styles.avatar} source={require("./fenris.png")} />
-        <View style={styles.texts}>
-          <Text style={styles.nested}>
-            *
-            <Text style={styles.textLeft}>left</Text>
-            *
-          </Text>
-          <Text style={styles.nested}>
-            *
-            <Text style={styles.testRight}>right</Text>
-            *
-          </Text>
+        <Text style={[styles.nested, styles.text]}>{this.state.label}</Text>
+        <Switch
+          style={styles.nested}
+          value={this.state.isButtonEnabled}
+          onValueChange={isButtonEnabled => this.changeValue()}
+        />
+        <View style={styles.whiteButton}>
+          <Button
+            title="Let's Rock"
+            style={styles.nested}
+            disabled={this.state.isButtonEnabled}
+            onPress={this.buttonPressed}
+          />
         </View>
+        {this.state.isGifDisplayed && (
+          <View style={styles.imageContainer}>
+            <Image style={styles.gif} source={require("./reaper.gif")} />
+          </View>
+        )}
       </View>
     );
   }
+
+  changeValue() {
+    if (this.state.isButtonEnabled == true) {
+      this.setState({ label: "Enabled" });
+      this.setState({ isButtonEnabled: false });
+    } else {
+      this.setState({ label: "Disabled" });
+      this.setState({ isButtonEnabled: true });
+    }
+    console.log(this.state.isButtonEnabled);
+  }
+
+  //To keep the 'this'
+  buttonPressed = () => {
+    this.setState({ isGifDisplayed: true });
+    console.log("button pushed");
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#DEDEDE",
     alignItems: "center",
     justifyContent: "center"
   },
 
-  avatar: {
-    borderRadius: 75,
-    borderWidth: 1,
-    borderColor: "#000000",
-    width: 150,
-    height: 150,
-    marginTop: 20
+  whiteButton: {
+    backgroundColor: "#fff",
+    margin: 20
   },
 
-  textLeft: {
-    color: "#4286f4",
-    textAlign: "left"
+  imageContainer: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
   },
 
-  testRight: {
-    color: "#f44141",
-    textAlign: "right"
+  gif: {
+    flex: 1,
+    resizeMode: "stretch"
   },
 
-  texts: {
-    flexDirection: "row"
+  text: {
+    fontSize: 20,
+    padding: 20
   },
 
   nested: {
