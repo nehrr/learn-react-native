@@ -20,12 +20,23 @@ class DetailView extends React.Component {
   };
 
   render() {
+    console.log(this.props.navigation.state.params);
+    // const { id } = this.props.navigation.state.params;
+    // const { name } = this.props.navigation.state.params;
     //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
 
     return (
       <View>
-        <Text>Pokemon Name</Text>
-        <Image style={styles.avatar} source={require("./fenris.png")} />
+        <Text style={styles.text}>
+          {this.props.navigation.state.params.name}
+        </Text>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={{
+            uri:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json"
+          }}
+        />
       </View>
     );
   }
@@ -37,11 +48,19 @@ class Pokedex extends React.Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     const list = pokemons.map(pokemon => {
       return (
         <TouchableOpacity style={styles.cell}>
           <View key={pokemon.id} style={styles.item}>
-            <Text style={styles.text}>{_.capitalize(pokemon.name)}</Text>
+            <Text
+              style={styles.text}
+              onPress={() =>
+                navigate("DetailView", { id: pokemon.id, name: pokemon.name })
+              }
+            >
+              {_.capitalize(pokemon.name)}
+            </Text>
           </View>
         </TouchableOpacity>
       );
@@ -67,7 +86,7 @@ const Root = StackNavigator({
   Pokedex: {
     screen: Pokedex
   },
-  Details: {
+  DetailView: {
     screen: DetailView
   }
 });
