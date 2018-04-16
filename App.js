@@ -22,26 +22,36 @@ class Pokedex extends React.Component {
   };
 
   render() {
-    // console.log(this.state.pokemons);
-  }
-}
+    console.disableYellowBox = true;
 
-showList() {
-  const list = pokemons.map(pokemon => {
     return (
-      <TouchableOpacity style={styles.cell}>
-        <View key={pokemon.id} style={styles.item}>
-          <Text style={styles.text}>{_.capitalize(pokemon.name)}</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        {this.state.isGifDisplayed ? this.ViewGif() : this.ViewBase()}
+      </View>
     );
-  });
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <ScrollView>{list}</ScrollView>
-    </View>
-  );
+  showList() {
+    const list = pokemons.map(pokemon => {
+      return (
+        <TouchableOpacity style={styles.cell}>
+          <View key={pokemon.id} style={styles.item}>
+            <Text style={styles.text}>{_.capitalize(pokemon.name)}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    });
+
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <ScrollView>{list}</ScrollView>
+      </View>
+    );
+  }
+
+  showDetails(id) {
+    //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
+  }
 }
 
 export default class App extends React.Component {
