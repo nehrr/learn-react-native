@@ -14,7 +14,22 @@ import pokemons from "./pokemon.json";
 
 const { width, height } = Dimensions.get("window");
 
-class DetailView extends React.Component {}
+class DetailView extends React.Component {
+  static navigationOptions = {
+    title: "Details"
+  };
+
+  render() {
+    //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
+
+    return (
+      <View>
+        <Text>Pokemon Name</Text>
+        <Image style={styles.avatar} source={require("./fenris.png")} />
+      </View>
+    );
+  }
+}
 
 class Pokedex extends React.Component {
   static navigationOptions = {
@@ -22,16 +37,6 @@ class Pokedex extends React.Component {
   };
 
   render() {
-    console.disableYellowBox = true;
-
-    return (
-      <View style={styles.container}>
-        {this.state.isGifDisplayed ? this.ViewGif() : this.ViewBase()}
-      </View>
-    );
-  }
-
-  showList() {
     const list = pokemons.map(pokemon => {
       return (
         <TouchableOpacity style={styles.cell}>
@@ -48,17 +53,6 @@ class Pokedex extends React.Component {
       </View>
     );
   }
-
-  showDetails(id) {
-    //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
-
-    return (
-      <View>
-        <Text>Pokemon Name</Text>
-        <Image />
-      </View>
-    );
-  }
 }
 
 export default class App extends React.Component {
@@ -72,6 +66,9 @@ export default class App extends React.Component {
 const Root = StackNavigator({
   Pokedex: {
     screen: Pokedex
+  },
+  Details: {
+    screen: DetailView
   }
 });
 
