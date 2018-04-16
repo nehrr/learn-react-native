@@ -21,6 +21,11 @@ class DetailView extends React.Component {
 
   render() {
     console.log(this.props.navigation.state.params);
+    const pic =
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+      this.props.navigation.state.params.id +
+      ".json";
+    console.log(pic);
     // const { id } = this.props.navigation.state.params;
     // const { name } = this.props.navigation.state.params;
     //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
@@ -33,8 +38,7 @@ class DetailView extends React.Component {
         <Image
           style={{ width: 50, height: 50 }}
           source={{
-            uri:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json"
+            uri: pic
           }}
         />
       </View>
