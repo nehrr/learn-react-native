@@ -23,23 +23,25 @@ class Pokedex extends React.Component {
 
   render() {
     // console.log(this.state.pokemons);
-
-    const list = pokemons.map(pokemon => {
-      return (
-        <TouchableOpacity style={styles.cell}>
-          <View key={pokemon.id} style={styles.item}>
-            <Text style={styles.text}>{_.capitalize(pokemon.name)}</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    });
-
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ScrollView>{list}</ScrollView>
-      </View>
-    );
   }
+}
+
+showList() {
+  const list = pokemons.map(pokemon => {
+    return (
+      <TouchableOpacity style={styles.cell}>
+        <View key={pokemon.id} style={styles.item}>
+          <Text style={styles.text}>{_.capitalize(pokemon.name)}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  });
+
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <ScrollView>{list}</ScrollView>
+    </View>
+  );
 }
 
 export default class App extends React.Component {
