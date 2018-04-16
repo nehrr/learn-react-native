@@ -1,0 +1,62 @@
+[
+	{
+		"id": 1,
+		"name": "bulbasaur"
+	},
+	{
+		"id": 4,
+		"name": "charmander"
+	},
+	{
+		"id": 7,
+		"name": "squirtle"
+	},
+	{
+		"id": 25,
+		"name": "pikachu"
+	},
+	{
+		"id": 37,
+		"name": "vulpix"
+	},
+	{
+		"id": 39,
+		"name": "jigglypuff"
+	},
+	{
+		"id": 52,
+		"name": "meowth"
+	},
+	{
+		"id": 54,
+		"name": "psyduck"
+	},
+	{
+		"id": 63,
+		"name": "abra"
+	},
+	{
+		"id": 109,
+		"name": "koffing"
+	},
+	{
+		"id": 116,
+		"name": "horsea"
+	},
+	{
+		"id": 130,
+		"name": "gyarados"
+	},
+	{
+		"id": 133,
+		"name": "eevee"
+	},
+	{
+		"id": 147,
+		"name": "dratini"
+	},
+	{
+		"id": 150,
+		"name": "mewtwo"
+	}
+]
