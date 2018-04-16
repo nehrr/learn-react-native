@@ -51,6 +51,13 @@ class Pokedex extends React.Component {
 
   showDetails(id) {
     //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
+
+    return (
+      <View>
+        <Text>Pokemon Name</Text>
+        <Image />
+      </View>
+    );
   }
 }
 
