@@ -24,19 +24,19 @@ class DetailView extends React.Component {
     const pic =
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
       this.props.navigation.state.params.id +
-      ".json";
+      ".png";
     console.log(pic);
     // const { id } = this.props.navigation.state.params;
     // const { name } = this.props.navigation.state.params;
     //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.json
 
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.text}>
-          {this.props.navigation.state.params.name}
+          {_.capitalize(this.props.navigation.state.params.name)}
         </Text>
         <Image
-          style={{ width: 50, height: 50 }}
+          style={styles.image}
           source={{
             uri: pic
           }}
@@ -118,5 +118,10 @@ const styles = StyleSheet.create({
 
   nested: {
     padding: 20
+  },
+
+  image: {
+    height: 250,
+    width: 250
   }
 });
